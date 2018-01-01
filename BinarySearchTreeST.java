@@ -1,4 +1,3 @@
-import edu.princeton.cs.algs4.In;
 
 import java.util.*;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -167,6 +166,30 @@ public class BinarySearchTreeST<Key extends Comparable<Key>, Value> {
         else return max(currentNode.left);
     }
 
+    public Value floor(Key key){
+        return floor(root , key);
+    }
+
+    private Value floor(Node currentNode , Key key){
+        if (currentNode == null)
+            return null;
+
+        int cmp = key.compareTo(currentNode.key);
+        if (cmp == 0)
+            return currentNode.value;
+        if (cmp <0)
+            return floor(currentNode.left , key);
+        if (cmp > 0){
+            Value x = floor(currentNode.right , key);
+            if (x != null)
+                return x;
+            else
+                return currentNode.value;
+
+        }
+        return null;
+
+    }
 
 
 
@@ -204,6 +227,8 @@ public class BinarySearchTreeST<Key extends Comparable<Key>, Value> {
         System.out.println("Max = "+st.max());
         System.out.println("Min = "+st.min());
         st.levelOrder();
+
+        System.out.println("Floor  "+st.floor("U"));
 
 
     }
