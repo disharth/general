@@ -1,4 +1,3 @@
-
 import java.util.*;
 import java.util.concurrent.ArrayBlockingQueue;
 
@@ -10,6 +9,7 @@ public class BinarySearchTreeST<Key extends Comparable<Key>, Value> {
         Key key;
         Value value;
         Node left , right;
+        int count; // count of elements in a this subtree.
 
         boolean isTeminator;
 
@@ -49,6 +49,11 @@ public class BinarySearchTreeST<Key extends Comparable<Key>, Value> {
 
     }
 
+    private int size(Node node){
+        if (node == null) return 0;
+        else return node.count;
+    }
+
 
     private Node put(Node currentNode , Key key , Value value){
         if (currentNode == null)
@@ -62,6 +67,8 @@ public class BinarySearchTreeST<Key extends Comparable<Key>, Value> {
             else if (cmp == 0)
                 currentNode.value = value;
         }
+
+        currentNode.count = size(currentNode.left) + 1 + size(currentNode.right);
 
         return currentNode;
 
@@ -190,6 +197,9 @@ public class BinarySearchTreeST<Key extends Comparable<Key>, Value> {
         return null;
 
     }
+
+
+
 
 
 
